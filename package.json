@@ -11,18 +11,39 @@
     "Node.js",
     "Express.js"
   ],
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "verbose": true,
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "collectCoverageFrom": [
+      "test/*.{js,jsx}",
+      "!test/each.test.js"
+    ],
+    "maxConcurrency": 5
+  },
   "author": "M Akmal Fathurrahman",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.2",
     "winston": "^3.11.0",
-    "winston-daily-rotate-file": "^4.7.1",
-    "express": "^4.18.2"
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
+    "nodemon": "^3.0.3",
     "supertest": "6.3.4"
   }
 }
