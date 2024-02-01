@@ -5,12 +5,20 @@ const app = express();
 
 app.get("/products/:id", (req, res) => {
   const productId = req.params.id;
-  res.send(`Product: ${productId}`);
+  if (productId) {
+    res.send(`Product: ${productId}`);
+  } else {
+    res.status(404);
+  }
 });
 
 app.get("/categories/:id(\\d+)", (req, res) => {
   const categoryId = req.params.id;
-  res.send(`Category: ${categoryId}`);
+  if (categoryId) {
+    res.send(`Category: ${categoryId}`);
+  } else {
+    res.status(404);
+  }
 });
 
 test("Route Parameter Test", async () => {
@@ -19,6 +27,9 @@ test("Route Parameter Test", async () => {
 
   response = await request(app).get("/products/about");
   expect(response.text).toBe("Product: about");
+
+  response = await request(app).get("/products");
+  expect(response.status).toBe(404);
 
   response = await request(app).get("/categories/12345");
   expect(response.text).toBe("Category: 12345");
